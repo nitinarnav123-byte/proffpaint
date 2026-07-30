@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProffPaint AS — Maler i Oslo og Viken</title>
+<meta name="description" content="ProffPaint AS — malerfirma i Ytre Enebakk. Innvendig og utvendig maling, sparkling, tapetsering og flislegging. 413 fullførte jobber, 4.97 av 5 på Mittanbud.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="proffpaint-as-Photoroom.png" type="image/png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ProffPaint AS","telephone":"+4745059555","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"Ekornveien 14","postalCode":"1914","addressLocality":"Ytre Enebakk","addressCountry":"NO"},"openingHours":["Mo-Fr 08:00-17:00","Sa 08:00-14:00"],"sameAs":["https://mittanbud.no/bedrift/418486","https://www.instagram.com/proffpaint_as/"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.97","reviewCount":"303"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://images.pexels.com">
+<style>
+:root{
+  --bg:#f6f1ea; --bg2:#ece2d4; --ink:#221f1c; --ink2:#2f2a25; --mid:#6b5f54; --faint:#8a7d6e;
+  --rule:rgba(34,31,28,.1); --gold:#b5703a; --gold2:#d99a5f;
+  --gold-text:#8a5429; --faint-text:#5c5346;
+  --fd:'Cormorant',Georgia,serif; --fm:'DM Mono','Courier New',monospace;
+  --ease-fn:cubic-bezier(0.16,1,0.3,1); --ease:0.6s var(--ease-fn);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fm);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--fm);cursor:pointer;border:none;background:none}
+.page{display:none}.page.active{display:block}
+
+/* SECTION BACKGROUND VARIANTS */
+.sec-tint{--bg:#f1e8dc;--bg2:#e7d8c5;--mid:#645846;background-color:var(--bg)}
+.sec-clay{--bg:#ead9c4;--bg2:#ddc7ac;--mid:#5e5346;--gold:#824a22;background-color:var(--bg)}
+.sec-dark{--bg:#29241f;--bg2:#332c25;--ink:#f7f2ea;--ink2:#1a1612;--mid:rgba(247,242,234,.62);--faint:rgba(247,242,234,.55);--rule:rgba(247,242,234,.12);--gold:#dba36c;--gold2:#f0c08a;--gold-text:#dba36c;--faint-text:rgba(247,242,234,.55);background-color:var(--bg);color:var(--ink);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 64px)}
+
+/* SWATCH STRIP — paint colour divider, decorative */
+.swatch-strip{display:flex;height:12px;width:100%}
+.swatch-strip span{flex:1}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 2.5rem;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+#nav.scrolled{background:rgba(246,241,234,.96);backdrop-filter:blur(14px);padding:1rem 2.5rem;border-bottom-color:var(--rule)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:38px;width:auto;display:block}
+.nav-center{display:none;list-style:none;gap:1.8rem;align-items:center;justify-content:center}
+.nav-center a{font-family:var(--fm);font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);opacity:.55;transition:opacity .3s}
+.nav-center a:hover,.nav-center a.active{opacity:1;color:var(--gold-text)}
+.nav-right{display:none;justify-content:flex-end}
+.nav-right a{font-family:var(--fm);font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text);opacity:.9;transition:opacity .3s}
+.nav-right a:hover{opacity:1}
+.hbg{display:flex;flex-direction:column;gap:5px;width:44px;height:44px;justify-content:center;margin-left:auto}
+.hbg span{display:block;height:1px;background:var(--ink);transition:all .3s}
+.hbg span:nth-child(1){width:22px}
+.hbg span:nth-child(2){width:14px;margin-left:auto}
+.hbg.open span:nth-child(1){transform:translateY(6px) rotate(45deg);width:22px}
+.hbg.open span:nth-child(2){transform:translateY(-6px) rotate(-45deg);width:22px;margin-left:0}
+@media(min-width:1000px){#nav{display:grid;grid-template-columns:1fr auto 1fr}.nav-center{display:flex}.nav-right{display:flex}.hbg{display:none}}
+
+.mob-nav{position:fixed;inset:0;z-index:899;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .4s;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem 2.5rem 5rem}
+.mob-nav.open{opacity:1;pointer-events:auto}
+.mob-nav-item{display:block;font-family:var(--fd);font-size:clamp(2.4rem,11vw,5rem);font-weight:300;line-height:1;color:rgba(34,31,28,.15);padding:.3rem 0;border-top:1px solid var(--rule);transition:color .3s;letter-spacing:-.02em}
+.mob-nav-item:hover{color:var(--ink)}
+.mob-nav-item:last-child{border-bottom:1px solid var(--rule)}
+.mob-contact{margin-top:2.5rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text)}
+
+.mob-sticky{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:800;background:var(--ink);padding:.9rem 1.8rem;align-items:center;justify-content:space-between}
+@media(min-width:700px){.mob-sticky{display:none}}
+.mob-phone{font-family:var(--fd);font-style:italic;font-size:1rem;color:rgba(255,255,255,.6)}
+.ring-btn{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:.6rem 1.4rem;background:var(--gold);color:#fff;transition:background .2s}
+.ring-btn:hover{background:var(--gold2)}
+@media(max-width:699px){body{padding-bottom:56px}}
+
+/* HERO */
+.hero{min-height:92vh;display:grid;grid-template-columns:1fr;position:relative;overflow:hidden;padding-top:5.5rem}
+@media(min-width:768px){.hero{grid-template-columns:48% 52%}}
+.hero-bg-num{position:absolute;top:50%;left:-2vw;transform:translateY(-52%);font-family:var(--fd);font-size:55vw;font-weight:600;line-height:.85;color:rgba(34,31,28,.04);user-select:none;pointer-events:none;letter-spacing:-.05em}
+.hero-left{position:relative;z-index:1;padding:clamp(1.4rem,4vw,3rem) clamp(2rem,5vw,4rem);display:flex;flex-direction:column;justify-content:center;gap:clamp(1.2rem,2.5vw,2rem);min-height:55vh}
+@media(min-width:768px){.hero-left{min-height:calc(92vh - 5.5rem)}}
+.hero-eyebrow{font-family:var(--fm);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::after{content:'';display:block;width:28px;height:1px;background:var(--gold);opacity:.5}
+.hero-name{font-family:var(--fd);font-size:clamp(3.6rem,9vw,7.5rem);font-weight:300;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin:0}
+.hero-swatches{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.hero-swatches .chips{display:flex;flex-shrink:0}
+.hero-swatches .chips span{width:18px;height:18px;display:block;margin-right:-1px;border:1px solid var(--bg)}
+.hero-swatches small{font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint-text)}
+.hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding-top:clamp(1.2rem,2.5vw,2rem);border-top:1px solid var(--rule);flex-wrap:wrap}
+.hero-desc{font-family:var(--fm);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint-text);line-height:2}
+.hero-cta-wrap{display:flex;gap:.8rem;flex-wrap:wrap;max-width:100%}
+.hero-right{position:relative;background:var(--bg);padding:.7rem .7rem 0 0}
+@media(max-width:767px){.hero-right{height:82vw;min-height:320px;padding:.4rem .4rem 0 0}}
+@media(min-width:768px){.hero-right{height:100%;display:flex;align-items:flex-start}}
+.hero-frame{position:relative;width:100%;height:100%;overflow:hidden;background:var(--bg2)}
+.hero-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;filter:contrast(1.05) brightness(.92);transform:scale(1.04);transition:transform 2s var(--ease-fn)}
+.hero-frame img.loaded{transform:scale(1)}
+.hero-vert{position:absolute;right:1.2rem;bottom:2.4rem;writing-mode:vertical-rl;font-family:var(--fm);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);z-index:1}
+.hero-card{position:absolute;left:-1px;bottom:0;background:var(--bg);padding:1.15rem 1.5rem;z-index:2;display:flex;align-items:center;gap:1.3rem;border-top:1px solid var(--rule);border-right:1px solid var(--rule)}
+.hero-card-div{width:1px;align-self:stretch;background:var(--rule)}
+.hero-card-num{font-family:var(--fd);font-style:italic;font-size:2.3rem;font-weight:300;line-height:1;color:var(--ink);display:block}
+.hero-card-label{font-family:var(--fm);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint-text);display:block;margin-top:.3rem;white-space:nowrap}
+
+/* PRESTIGE MARQUEE */
+.prestige{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.5rem 2rem;background:var(--bg)}
+.prestige-track{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 2.4rem}
+.prestige-track span{position:relative;font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-text)}
+.prestige-track span:not(:last-child)::after{content:'';position:absolute;right:-1.2rem;top:50%;transform:translateY(-50%);width:3px;height:3px;border-radius:50%;background:var(--gold)}
+
+/* WORK / GALLERY GRID */
+.work{position:relative;padding:clamp(4rem,8vw,8rem) 0 0;background:var(--bg)}
+.work-header{padding:0 clamp(2rem,5vw,4rem) 3rem;display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:1rem}
+.work-title{font-family:var(--fd);font-size:clamp(2.6rem,7vw,6.5rem);font-weight:300;font-style:italic;line-height:.9;letter-spacing:-.02em;color:var(--ink)}
+.work-count{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-text)}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+@media(min-width:768px){.work-grid{grid-template-columns:3fr 5fr 3fr;grid-template-rows:480px 360px 520px}}
+.wg-item{position:relative;overflow:hidden;background:var(--bg2);aspect-ratio:3/4}
+@media(min-width:768px){.wg-item{aspect-ratio:unset}.wg-item:nth-child(1){grid-column:1;grid-row:1}.wg-item:nth-child(2){grid-column:2;grid-row:1/3}.wg-item:nth-child(3){grid-column:3;grid-row:1}.wg-item:nth-child(4){grid-column:1;grid-row:2/4}.wg-item:nth-child(5){grid-column:3;grid-row:2/4}.wg-item:nth-child(6){grid-column:2;grid-row:3}}
+.wg-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.9) contrast(1.04);transition:transform .9s var(--ease-fn),filter .6s;transform:scale(1.05)}
+.wg-item:hover img{transform:scale(1);filter:brightness(.96) contrast(1)}
+.wg-num{position:absolute;top:-1.5rem;left:-.5rem;font-family:var(--fd);font-style:italic;font-size:clamp(5rem,9vw,9rem);font-weight:300;color:var(--bg);line-height:1;pointer-events:none;z-index:2;mix-blend-mode:screen;opacity:.6}
+.wg-label{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.wg-item:hover .wg-label{opacity:1;transform:none}
+
+/* GALLERY PAGE GRID */
+.gal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+@media(min-width:700px){.gal-grid{grid-template-columns:repeat(3,1fr)}}
+.gal-item{position:relative;overflow:hidden;background:var(--bg2);aspect-ratio:1/1}
+.gal-item img{width:100%;height:100%;object-fit:cover;filter:brightness(.92) contrast(1.04);transition:transform .8s var(--ease-fn)}
+.gal-item:hover img{transform:scale(1.05)}
+.gal-cap{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(to top,rgba(34,31,28,.75) 0%,transparent 100%);font-family:var(--fm);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.gal-item:hover .gal-cap{opacity:1;transform:none}
+
+/* STATEMENT */
+.statement{padding:clamp(5rem,10vw,10rem) clamp(2rem,6vw,5rem);display:grid;grid-template-columns:1fr;gap:3rem;border-bottom:1px solid var(--rule)}
+@media(min-width:768px){.statement{grid-template-columns:1fr 2.5fr;gap:5rem}}
+.statement-index{font-family:var(--fm);font-size:.69rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint-text)}
+.statement-right blockquote{font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;font-style:italic;line-height:1.3;color:var(--ink);letter-spacing:-.01em}
+.statement-right blockquote::before{content:'\201C'}
+.statement-attr{margin-top:2rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint-text)}
+.stars{display:flex;gap:3px;color:var(--gold);margin-bottom:1rem}
+.stars svg{width:14px;height:14px}
+
+/* CREDS */
+.creds{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule);background:var(--bg)}
+@media(min-width:700px){.creds{grid-template-columns:repeat(4,1fr)}}
+.cred-cell{padding:2.5rem clamp(1.5rem,3vw,2.5rem);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:.5rem}
+.cred-cell:nth-child(2n){border-right:none}
+@media(min-width:700px){.cred-cell{border-bottom:none}.cred-cell:nth-child(2n){border-right:1px solid var(--rule)}.cred-cell:last-child{border-right:none}}
+.cred-big{font-family:var(--fd);font-style:italic;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1;color:var(--ink)}
+.cred-sm{font-family:var(--fm);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-text)}
+
+/* SECTION HEROES (sub-pages) */
+.svc-hero{min-height:60vh;display:grid;grid-template-columns:1fr;overflow:hidden;padding-top:5.5rem;background:var(--bg2);position:relative}
+@media(min-width:768px){.svc-hero{grid-template-columns:1fr 1fr;min-height:70vh}.svc-hero-text{border-right:1px solid var(--rule)}}
+.svc-hero-text{padding:clamp(3rem,7vw,7rem) clamp(2rem,5vw,4rem);display:flex;flex-direction:column;justify-content:flex-end;gap:1.5rem}
+.svc-hero-title{font-family:var(--fd);font-size:clamp(3.2rem,9vw,8rem);font-weight:300;line-height:.88;letter-spacing:-.03em;color:var(--ink)}
+.svc-hero-title em{font-style:italic;color:var(--mid);display:block}
+.svc-hero-sub{font-family:var(--fm);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);max-width:34ch;line-height:2}
+.svc-hero-img{position:relative;overflow:hidden;min-height:42vw;background:var(--ink2)}
+@media(max-width:767px){.svc-hero-img{min-height:55vw}}
+.svc-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.06)}
+
+/* SERVICE ITEMS */
+.svc-items{border-top:1px solid var(--rule)}
+.svc-item{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--rule);transition:background .3s}
+.svc-item:hover{background:var(--bg2)}
+@media(min-width:768px){.svc-item{grid-template-columns:3fr 2fr}.svc-item-main{border-right:1px solid var(--rule)}}
+.svc-item-main{padding:clamp(2.5rem,4vw,4rem) clamp(2rem,5vw,4rem);display:flex;flex-direction:column;gap:1.2rem}
+.svc-n{font-family:var(--fm);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text)}
+.svc-title{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:300;line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.svc-body{font-family:var(--fm);font-size:.9rem;font-weight:300;color:var(--mid);line-height:1.9;max-width:48ch}
+.svc-price{font-family:var(--fm);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint-text);margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--rule);width:fit-content}
+.svc-item-media{position:relative;overflow:hidden;min-height:240px;background:var(--bg2)}
+.svc-item-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.85) contrast(1.05);transition:transform .8s var(--ease-fn)}
+.svc-item:hover .svc-item-media img{transform:scale(1.04)}
+.svc-extra{padding:clamp(3rem,5vw,5rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule)}
+.svc-extra-title{font-family:var(--fm);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint-text);margin-bottom:2rem}
+.svc-extra-row{display:flex;justify-content:space-between;align-items:baseline;padding:1.1rem 0;border-top:1px solid var(--rule);transition:transform .3s;gap:1rem}
+.svc-extra-row:last-child{border-bottom:1px solid var(--rule)}
+.svc-extra-row:hover{transform:translateX(1rem)}
+.svc-extra-name{font-family:var(--fd);font-style:italic;font-size:clamp(.95rem,1.8vw,1.2rem);font-weight:300;color:var(--ink)}
+.svc-extra-price{font-family:var(--fm);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint-text);text-align:right;flex-shrink:0}
+
+/* CHECKLIST + PROCESS */
+.checklist-section{padding:clamp(3rem,6vw,6rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule)}
+.checklist{list-style:none;display:grid;gap:1.4rem;grid-template-columns:1fr;margin-top:2rem}
+@media(min-width:700px){.checklist{grid-template-columns:1fr 1fr}}
+.checklist li{display:flex;align-items:flex-start;gap:.9rem;font-family:var(--fm);font-size:.95rem;color:var(--mid);line-height:1.6}
+.checklist svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:4px}
+.process-grid{display:grid;gap:2.5rem;grid-template-columns:1fr;padding:clamp(3rem,6vw,6rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule)}
+@media(min-width:700px){.process-grid{grid-template-columns:repeat(4,1fr)}}
+.process-step .num{font-family:var(--fd);font-style:italic;font-size:3rem;color:var(--gold);font-weight:300;margin-bottom:.5rem}
+.process-step h3{font-family:var(--fd);font-size:1.3rem;font-weight:400;margin-bottom:.5rem;color:var(--ink)}
+.process-step p{font-family:var(--fm);color:var(--mid);font-size:.9rem;line-height:1.8}
+
+/* SECTION HEADER GENERIC */
+.sec-h{padding:0 clamp(2rem,5vw,4rem);margin-bottom:2.5rem}
+.sec-eyebrow{font-family:var(--fm);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.sec-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--fd);font-style:italic;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:300;color:var(--ink)}
+
+/* CTA BAND */
+.cta-band{padding:clamp(4rem,8vw,8rem) clamp(2rem,5vw,4rem);text-align:center;background-color:var(--ink);color:var(--bg);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 64px)}
+.cta-band h2{font-family:var(--fd);font-style:italic;font-weight:300;font-size:clamp(2rem,5vw,3.6rem);margin-bottom:1rem;color:#fff}
+.cta-band p{font-family:var(--fm);font-size:.95rem;color:rgba(255,255,255,.6);margin-bottom:2rem}
+.cta-trust{margin-top:1.5rem;font-family:var(--fm);font-size:.69rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}
+
+/* BUTTONS */
+.btn-p{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2.1rem;min-height:52px;background:var(--ink);color:var(--bg);font-family:var(--fm);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:background .2s,transform .2s}
+.btn-p:hover{background:var(--gold);transform:translateY(-1px)}
+.cta-band .btn-p{background:var(--gold);color:#fff}
+.cta-band .btn-p:hover{background:var(--gold2)}
+.btn-o{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 2.1rem;min-height:52px;border:1px solid rgba(34,31,28,.2);color:var(--mid);font-family:var(--fm);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:border-color .2s,color .2s,background .2s}
+.btn-o:hover{border-color:var(--ink);color:var(--ink);background:rgba(34,31,28,.03)}
+.hero-right ~ .hero-left .btn-o,.btn-o.on-dark{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)}
+.btn-o.on-dark:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.06)}
+
+/* BOOKING / FORMS */
+.booking-section{padding:clamp(3rem,6vw,6rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule)}
+.booking-grid{display:grid;gap:2px;grid-template-columns:1fr;background:var(--rule);margin-top:2rem}
+@media(min-width:1000px){.booking-grid{grid-template-columns:1fr 1fr}}
+.booking-card{background:var(--bg);padding:clamp(1.5rem,3vw,2.5rem)}
+.booking-card h3{font-family:var(--fd);font-style:italic;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:300;color:var(--ink);margin-bottom:1.5rem}
+.cf{display:flex;flex-direction:column;gap:1.3rem}
+.fg{display:flex;flex-direction:column;gap:.5rem}
+.fg label{font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint-text)}
+.fg input,.fg select,.fg textarea{font-family:var(--fm);font-size:.96rem;font-weight:300;color:var(--ink);background:rgba(34,31,28,.03);border:1px solid var(--rule);border-bottom:1px solid rgba(34,31,28,.2);padding:.9rem .8rem;width:100%;min-height:48px;transition:border-color .3s,background .3s;outline:none;border-radius:0}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:rgba(181,112,58,.04)}
+.fg textarea{min-height:110px;resize:vertical}
+.form-row{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:560px){.form-row{grid-template-columns:1fr 1fr}}
+.ferr{font-family:var(--fm);font-size:.75rem;color:#a04030;display:none}
+.fg.err .ferr{display:block}
+.fg.err input,.fg.err select,.fg.err textarea{border-color:rgba(160,60,40,.4)}
+.btn-send{display:inline-flex;align-items:center;gap:.8rem;padding:.95rem 2.1rem;min-height:52px;background:var(--ink);color:var(--bg);font-family:var(--fm);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,transform .2s;border:none;cursor:pointer}
+.btn-send:hover{background:var(--gold);transform:translateY(-1px)}
+.btn-send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.fok{padding:1.5rem;border-left:2px solid var(--gold);font-family:var(--fd);font-style:italic;font-size:1.1rem;color:var(--mid);display:none;background:rgba(181,112,58,.05)}
+.reassure{padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule);max-width:70ch}
+.reassure p{font-family:var(--fm);font-size:.95rem;color:var(--mid);line-height:2}
+
+/* FAQ */
+.faq-section{padding:clamp(3rem,5vw,5rem) clamp(2rem,5vw,4rem);border-bottom:1px solid var(--rule)}
+.faq-item{border-top:1px solid var(--rule)}
+.faq-item:last-child{border-bottom:1px solid var(--rule)}
+.faq-btn{width:100%;text-align:left;padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;font-family:var(--fd);font-size:1.1rem;font-weight:300;font-style:italic;color:var(--mid);min-height:48px;transition:color .3s}
+.faq-btn:hover{color:var(--ink)}
+.faq-btn svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;transition:transform .3s}
+.faq-btn[aria-expanded="true"] svg{transform:rotate(45deg)}
+.faq-ans{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .3s ease}
+.faq-ans.open{grid-template-rows:1fr}
+.faq-inner{min-height:0;padding:0 0 1.8rem;font-family:var(--fm);font-size:.9rem;font-weight:300;color:var(--mid);line-height:1.9;max-width:62ch}
+
+/* ABOUT PAGE */
+.about-hero{min-height:90vh;display:grid;grid-template-columns:1fr;padding-top:5.5rem;overflow:hidden}
+@media(min-width:900px){.about-hero{grid-template-columns:1fr 1fr;min-height:90vh}.about-text-col{border-left:1px solid var(--rule)}}
+.about-img-col{position:relative;overflow:hidden;background:var(--ink2);min-height:65vw}
+@media(min-width:900px){.about-img-col{min-height:unset}}
+.about-img-col img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.82) contrast(1.06);transform:scale(1.04);transition:transform 2s var(--ease-fn)}
+.about-img-col img.loaded{transform:scale(1)}
+.about-text-col{padding:clamp(4rem,8vw,8rem) clamp(2.5rem,6vw,5.5rem);display:flex;flex-direction:column;gap:2rem;justify-content:center;background:var(--bg)}
+.about-overline{font-family:var(--fm);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text);display:flex;align-items:center;gap:.8rem}
+.about-overline::before{content:'';width:20px;height:1px;background:var(--gold)}
+.about-name{font-family:var(--fd);font-size:clamp(2.6rem,6vw,5rem);font-weight:300;line-height:1.05;letter-spacing:-.03em;color:var(--ink)}
+.about-name em{font-style:italic;color:var(--mid)}
+.about-rule{width:30px;height:1px;background:var(--rule)}
+.about-body{font-family:var(--fm);font-size:.95rem;font-weight:300;color:var(--mid);line-height:1.9;max-width:46ch}
+
+/* TIMELINE */
+.timeline{display:grid;gap:1.5rem;grid-template-columns:1fr;padding:clamp(3rem,6vw,6rem) clamp(2rem,5vw,4rem);border-top:2px solid var(--rule)}
+@media(min-width:700px){.timeline{grid-template-columns:repeat(4,1fr)}}
+.timeline-item{border-left:1px solid var(--rule);padding-left:1.2rem}
+.timeline-item .year{font-family:var(--fd);font-style:italic;font-size:2rem;color:var(--gold);font-weight:300}
+.timeline-item p{font-family:var(--fm);font-size:.9rem;color:var(--mid);line-height:1.8;margin-top:.4rem}
+
+/* VALUE CARDS */
+.value-row{display:grid;grid-template-columns:1fr;gap:2px;background:var(--rule);border-top:2px solid var(--rule)}
+@media(min-width:700px){.value-row{grid-template-columns:repeat(3,1fr)}}
+.value-cell{background:var(--bg);padding:clamp(2rem,4vw,3rem)}
+.value-cell h3{font-family:var(--fd);font-style:italic;font-size:1.6rem;font-weight:300;color:var(--ink);margin-bottom:1rem}
+.value-cell p{font-family:var(--fm);font-size:.9rem;color:var(--mid);line-height:1.9}
+
+/* TESTIMONIALS */
+.testimonials{padding:clamp(4rem,7vw,7rem) clamp(2rem,6vw,5rem);display:flex;flex-direction:column;gap:3.5rem;border-top:1px solid var(--rule)}
+.testi{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:768px){.testi{grid-template-columns:auto 1fr;gap:4rem;align-items:start}}
+.testi-n{font-family:var(--fm);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint-text);white-space:nowrap;padding-top:.4rem}
+.testi blockquote{font-family:var(--fd);font-style:italic;font-size:clamp(1.3rem,2.6vw,2rem);font-weight:300;line-height:1.4;color:var(--ink);letter-spacing:-.01em}
+.testi-who{margin-top:.8rem;font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint-text)}
+
+/* CONTACT PAGE */
+.contact-top{min-height:50vh;display:grid;grid-template-columns:1fr;padding-top:5.5rem;overflow:hidden;background:var(--bg);border-bottom:1px solid var(--rule)}
+@media(min-width:900px){.contact-top{grid-template-columns:1fr 1fr}.contact-top-text{border-right:1px solid var(--rule)}}
+.contact-top-text{padding:clamp(3rem,7vw,7rem) clamp(2rem,5vw,4rem);display:flex;flex-direction:column;justify-content:flex-end;gap:1.5rem}
+.contact-h1{font-family:var(--fd);font-size:clamp(2.6rem,7vw,6rem);font-weight:300;line-height:.95;letter-spacing:-.03em;color:var(--ink)}
+.contact-h1 em{font-style:italic;display:block;color:var(--mid)}
+.contact-sub{font-family:var(--fm);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint-text);line-height:2;max-width:30ch}
+.contact-top-img{position:relative;overflow:hidden;background:var(--ink2);min-height:45vw}
+@media(min-width:900px){.contact-top-img{min-height:unset}}
+.contact-top-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7) contrast(1.06)}
+.contact-body{display:grid;grid-template-columns:1fr;background:var(--bg)}
+@media(min-width:900px){.contact-body{grid-template-columns:1fr 1.4fr}.contact-aside{border-right:1px solid var(--rule)}}
+.contact-aside{padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);display:flex;flex-direction:column;gap:2.2rem}
+.contact-aside-h{font-family:var(--fd);font-style:italic;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--ink)}
+.c-detail{display:flex;gap:1.2rem;align-items:flex-start}
+.c-detail svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:3px}
+.c-label{font-family:var(--fm);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);display:block;margin-bottom:.3rem}
+.c-val{font-family:var(--fm);font-size:.92rem;font-weight:300;color:var(--mid);line-height:1.7;transition:color .3s}
+a.c-val:hover{color:var(--ink)}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table td{padding:.5rem 0;border-bottom:1px solid var(--rule);font-family:var(--fm);font-size:.9rem;color:var(--mid)}
+.hours-table td:last-child{text-align:right;color:var(--ink)}
+.contact-form-col{padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);background:var(--bg2)}
+.form-h{font-family:var(--fd);font-style:italic;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--ink);margin-bottom:2.5rem}
+.map-frame{width:100%;height:320px;border:0;filter:grayscale(100%) contrast(1.1);margin-top:2rem}
+.instagram-card{display:flex;align-items:center;gap:1rem;padding:1.5rem;border:1px solid var(--rule);margin-top:2rem}
+.instagram-card svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0}
+.instagram-card a{font-family:var(--fm);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);transition:color .3s}
+.instagram-card a:hover{color:var(--gold-text)}
+.instagram-card span{display:block;font-family:var(--fd);font-style:italic;font-size:1.2rem;color:var(--ink);margin-bottom:.3rem}
+
+/* FOOTER */
+footer{border-top:1px solid var(--rule);background:var(--bg);padding:3.5rem clamp(2rem,5vw,4rem) 2.5rem}
+.ft{display:grid;grid-template-columns:1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--rule);margin-bottom:1.5rem}
+@media(min-width:700px){.ft{grid-template-columns:2fr 1fr 1fr}}
+.fl{display:block}
+.fl img{height:42px;width:auto;display:block}
+.ftag{font-family:var(--fm);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--faint-text);margin-top:.4rem}
+.fnt{font-family:var(--fm);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);margin-bottom:1.2rem}
+.fnl{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.fnl a{font-family:var(--fm);font-size:.9rem;font-weight:300;color:var(--faint-text);padding:.1rem 0;transition:color .3s}
+.fnl a:hover{color:var(--ink)}
+.fci{display:flex;flex-direction:column;gap:.7rem}
+.fci-item{display:flex;align-items:flex-start;gap:.75rem}
+.fci-item svg{width:12px;height:12px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0;margin-top:3px;opacity:.7}
+.fci-item a,.fci-item span{font-family:var(--fm);font-size:.86rem;font-weight:300;color:var(--faint-text);line-height:1.6;transition:color .3s}
+.fci-item a:hover{color:var(--gold-text)}
+.fb{display:flex;flex-direction:column;gap:.3rem}
+@media(min-width:700px){.fb{flex-direction:row;justify-content:space-between;align-items:center}}
+.fc{font-family:var(--fm);font-size:.72rem;font-weight:300;color:var(--faint-text)}
+
+/* REVEAL + A11Y */
+@media(prefers-reduced-motion:no-preference){
+  .r{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .r.v{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+  .ri{opacity:0;transition:opacity .9s ease}
+  .ri.v{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){.r,.ri{opacity:1;transform:none;transition:none}}
+.skip{position:absolute;top:-100px;left:1rem;background:var(--ink);color:var(--bg);padding:.6rem 1.2rem;font-family:var(--fm);font-size:.75rem;z-index:9999;transition:top .2s}
+.skip:focus{top:1rem}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip">Hopp til innhold</a>
+
+<header role="banner">
+  <nav id="nav" role="navigation" aria-label="Navigasjon">
+    <a href="#hjem" class="nav-logo" onclick="go('hjem')"><img src="proffpaint-as-Photoroom.png" alt="ProffPaint AS"></a>
+    <ul class="nav-center" role="list">
+      <li><a href="#hjem" onclick="go('hjem')">Hjem</a></li>
+      <li><a href="#tjenester" onclick="go('tjenester')">Tjenester</a></li>
+      <li><a href="#galleri" onclick="go('galleri')">Galleri</a></li>
+      <li><a href="#bestilling" onclick="go('bestilling')">Bestilling</a></li>
+      <li><a href="#om-oss" onclick="go('om-oss')">Om oss</a></li>
+      <li><a href="#kontakt" onclick="go('kontakt')">Kontakt</a></li>
+    </ul>
+    <div class="nav-right"><a href="tel:+4745059555">Ring oss</a></div>
+    <button class="hbg" id="hbg" aria-label="Åpne meny" aria-expanded="false" aria-controls="mob-nav"><span></span><span></span></button>
+  </nav>
+</header>
+
+<nav class="mob-nav" id="mob-nav" role="navigation" aria-label="Mobilmeny" inert>
+  <ul role="list">
+    <li><a class="mob-nav-item" href="#hjem" onclick="go('hjem');closeMob()">Hjem</a></li>
+    <li><a class="mob-nav-item" href="#tjenester" onclick="go('tjenester');closeMob()">Tjenester</a></li>
+    <li><a class="mob-nav-item" href="#galleri" onclick="go('galleri');closeMob()">Galleri</a></li>
+    <li><a class="mob-nav-item" href="#bestilling" onclick="go('bestilling');closeMob()">Bestilling</a></li>
+    <li><a class="mob-nav-item" href="#om-oss" onclick="go('om-oss');closeMob()">Om oss</a></li>
+    <li><a class="mob-nav-item" href="#kontakt" onclick="go('kontakt');closeMob()">Kontakt</a></li>
+  </ul>
+  <p class="mob-contact">+47 450 59 555</p>
+</nav>
+
+<div class="mob-sticky">
+  <span class="mob-phone">450 59 555</span>
+  <a href="tel:+4745059555" class="ring-btn">Ring nå</a>
+</div>
+
+<main id="main-content" role="main">
+<!-- ══ HJEM ══ -->
+<div id="page-hjem" class="page active">
+  <section class="hero" aria-label="ProffPaint">
+    <div class="hero-bg-num" aria-hidden="true">8</div>
+    <div class="hero-left" id="hero-left">
+      <p class="hero-eyebrow r">Ytre Enebakk · Est. 2017</p>
+      <h1 class="hero-name r d1">ProffPaint</h1>
+      <div class="hero-swatches r d2" aria-hidden="true">
+        <div class="chips"><span style="background:#b5703a"></span><span style="background:#8a9b6e"></span><span style="background:#c9a14a"></span><span style="background:#5d7a8c"></span><span style="background:#a8493a"></span><span style="background:#d9c7a8"></span></div>
+        <small>Riktig nyanse, hver gang</small>
+      </div>
+      <div class="hero-foot r d3">
+        <p class="hero-desc">Innvendig<br>Utvendig<br>Sparkling<br>Tapetsering</p>
+        <div class="hero-cta-wrap">
+          <a href="#bestilling" class="btn-p" onclick="go('bestilling')">Book befaring</a>
+          <a href="#tjenester" class="btn-o" onclick="go('tjenester')">Se tjenester</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-frame">
+        <!-- HERO — replace with @proffpaint_as foto: maler i arbeid i lyst nordisk rom -->
+        <img id="hero-img" loading="eager" fetchpriority="high" src="https://images.pexels.com/photos/5691471/pexels-photo-5691471.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Profesjonell maler fra ProffPaint i arbeid i et lyst rom">
+        <div class="hero-vert" aria-hidden="true">Maler · Oslo</div>
+      </div>
+      <div class="hero-card" aria-label="413 fullførte jobber, 4.97 av 5 på Mittanbud">
+        <div><span class="hero-card-num">413</span><span class="hero-card-label">Fullførte jobber</span></div>
+        <div class="hero-card-div"></div>
+        <div><span class="hero-card-num">4.97</span><span class="hero-card-label">★ Mittanbud</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="swatch-strip" aria-hidden="true" style="margin-top:clamp(3rem,6vw,5rem)"><span style="background:#b5703a"></span><span style="background:#8a9b6e"></span><span style="background:#c9a14a"></span><span style="background:#5d7a8c"></span><span style="background:#a8493a"></span><span style="background:#d9c7a8"></span><span style="background:#6b5f54"></span><span style="background:#2f2a25"></span></div>
+
+  <div class="prestige sec-tint" aria-label="Tillitsmarkører">
+    <div class="prestige-track" role="list">
+      <span role="listitem">413 fullførte jobber</span>
+      <span role="listitem">4.97 av 5 på Mittanbud</span>
+      <span role="listitem">Top Rated · Verifisert</span>
+      <span role="listitem">303 BankID-vurderinger</span>
+      <span role="listitem">8 års erfaring</span>
+    </div>
+  </div>
+
+  <section class="work" aria-label="Utvalgte prosjekter">
+    <div class="work-header">
+      <h2 class="work-title r">Prosjekter</h2>
+      <span class="work-count r">— se hele <a href="#galleri" onclick="go('galleri')" style="color:var(--gold-text)">galleriet</a></span>
+    </div>
+    <div class="work-grid">
+      <!-- Galleri-bilder — erstatt med foto fra @proffpaint_as -->
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">I</span><img loading="lazy" src="https://images.pexels.com/photos/271753/pexels-photo-271753.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lys og nymalt stue med hvite vegger"><span class="wg-label">Stue &middot; innvendig</span></div>
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">II</span><img loading="lazy" src="https://images.pexels.com/photos/933377/pexels-photo-933377.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Et utvalg malerpensler klare til bruk"><span class="wg-label">Detaljarbeid</span></div>
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">III</span><img loading="lazy" src="https://images.pexels.com/photos/6180671/pexels-photo-6180671.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Nymalt soverom med fargerik aksentvegg"><span class="wg-label">Soverom</span></div>
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">IV</span><img loading="lazy" src="https://images.pexels.com/photos/7218579/pexels-photo-7218579.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Maler arbeider med rull og maling"><span class="wg-label">Kjøkken</span></div>
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">V</span><img loading="lazy" src="https://images.pexels.com/photos/4953232/pexels-photo-4953232.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fasadearbeid utendørs med sikkerhetsutstyr"><span class="wg-label">Fasade &middot; utvendig</span></div>
+      <div class="wg-item ri"><span class="wg-num" aria-hidden="true">VI</span><img loading="lazy" src="https://images.pexels.com/photos/14990899/pexels-photo-14990899.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Sparkling og overflatebehandling av vegg"><span class="wg-label">Sparkling</span></div>
+    </div>
+  </section>
+
+  <div class="statement sec-dark">
+    <div class="r"><p class="statement-index">01 / Vurdering</p></div>
+    <div class="statement-right r d1">
+      <div class="stars" aria-label="5 av 5 stjerner">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.1 6.6L12 17l-5.8 3.2 1.1-6.6L2.5 9l6.6-.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.1 6.6L12 17l-5.8 3.2 1.1-6.6L2.5 9l6.6-.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.1 6.6L12 17l-5.8 3.2 1.1-6.6L2.5 9l6.6-.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.1 6.6L12 17l-5.8 3.2 1.1-6.6L2.5 9l6.6-.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.1 6.6L12 17l-5.8 3.2 1.1-6.6L2.5 9l6.6-.9z"/></svg>
+      </div>
+      <blockquote>Kjempefornøyd med ProffPaint. Punktlig, pålitelig, høy kvalitet på arbeid og attpåtil veldig trivelig. Kommer helt sikkert til å kontakte igjen i fremtiden!</blockquote>
+      <p class="statement-attr">— Petter, Oslo · BankID-verifisert på Mittanbud</p>
+    </div>
+  </div>
+
+  <div class="creds sec-clay" role="list">
+    <div class="cred-cell r" role="listitem"><span class="cred-big">413</span><span class="cred-sm">Fullførte jobber</span></div>
+    <div class="cred-cell r d1" role="listitem"><span class="cred-big">4.97</span><span class="cred-sm">Snitt av 5 stjerner</span></div>
+    <div class="cred-cell r d2" role="listitem"><span class="cred-big">303</span><span class="cred-sm">BankID-vurderinger</span></div>
+    <div class="cred-cell r d3" role="listitem"><span class="cred-big">8 år</span><span class="cred-sm">Siden 2017</span></div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="r">Klar for et profesjonelt malerarbeid?</h2>
+    <p class="r d1">Book en uforpliktende befaring i dag, så finner vi løsningen som passer ditt prosjekt.</p>
+    <a href="#bestilling" class="btn-p r d2" onclick="go('bestilling')">Book befaring</a>
+    <p class="cta-trust r d2">413 fullførte jobber · 4.97 av 5 stjerner · Svar innen 24 timer</p>
+  </div>
+</div>
+
+<!-- ══ TJENESTER ══ -->
+<div id="page-tjenester" class="page">
+  <div class="svc-hero">
+    <div class="svc-hero-text">
+      <p class="svc-hero-sub r">Tjenester · ProffPaint AS</p>
+      <h1 class="svc-hero-title r d1">Hva vi<br><em>tilbyr</em></h1>
+    </div>
+    <div class="svc-hero-img ri">
+      <!-- TJENESTER — replace with @proffpaint_as foto: nymalt, lyst rom med rene flater -->
+      <img loading="lazy" src="https://images.pexels.com/photos/5691700/pexels-photo-5691700.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Hvit maling klar til bruk på prosjektet">
+    </div>
+  </div>
+
+  <div class="svc-items">
+    <div class="svc-item">
+      <div class="svc-item-main">
+        <span class="svc-n r">01</span>
+        <h2 class="svc-title r d1">Innvendig maling</h2>
+        <p class="svc-body r d2">Maling av vegger og tak i stue, soverom, gang og kjeller, på nybygg og ved rehabilitering. Vi vurderer antall strøk og type maling ut fra underlag, slik at fargen blir jevn og dekkende.</p>
+        <span class="svc-price r d3">Ta kontakt for pris</span>
+      </div>
+      <div class="svc-item-media ri"><img loading="lazy" src="https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Innvendig maling av vegg"></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-main">
+        <span class="svc-n r">02</span>
+        <h2 class="svc-title r d1">Utvendig maling</h2>
+        <p class="svc-body r d2">Behandling av fasade, kledning og listverk. Vi vasker, sliper og grunner før strøkene påføres, slik at fargen tåler norsk klima og holder seg fin år etter år.</p>
+        <span class="svc-price r d3">Ta kontakt for pris</span>
+      </div>
+      <div class="svc-item-media ri"><img loading="lazy" src="https://images.pexels.com/photos/4953232/pexels-photo-4953232.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fasadearbeid utendørs med sikkerhetsutstyr"></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-main">
+        <span class="svc-n r">03</span>
+        <h2 class="svc-title r d1">Sparkling og overflatebehandling</h2>
+        <p class="svc-body r d2">Grundig sparkling av sprekker, skjøter og ujevnheter før maling eller tapet. Riktig underlagsbehandling og tørketid mellom strøkene er avgjørende for et glatt sluttresultat.</p>
+        <span class="svc-price r d3">Ta kontakt for pris</span>
+      </div>
+      <div class="svc-item-media ri"><img loading="lazy" src="https://images.pexels.com/photos/14990899/pexels-photo-14990899.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sparkling av vegg før maling"></div>
+    </div>
+    <div class="svc-item">
+      <div class="svc-item-main">
+        <span class="svc-n r">04</span>
+        <h2 class="svc-title r d1">Tapetsering</h2>
+        <p class="svc-body r d2">Montering av alt fra enkle strukturtapeter til mønstrede designtapeter. Vi sørger for rette skjøter, riktig limmengde og presise tilpasninger rundt vinduer og dører.</p>
+        <span class="svc-price r d3">Ta kontakt for pris</span>
+      </div>
+      <div class="svc-item-media ri"><img loading="lazy" src="https://images.pexels.com/photos/1672850/pexels-photo-1672850.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Fargerikt mønster og struktur på vegg"></div>
+    </div>
+  </div>
+
+  <div class="svc-extra sec-tint">
+    <p class="svc-extra-title r">Øvrige tjenester</p>
+    <div class="svc-extra-row r"><span class="svc-extra-name">Flislegging: bad, kjøkken og gang</span><span class="svc-extra-price">Ta kontakt for pris</span></div>
+    <div class="svc-extra-row r"><span class="svc-extra-name">Totalprosjekter: A til Å med vårt partnernettverk</span><span class="svc-extra-price">Ta kontakt for pris</span></div>
+    <div style="margin-top:2.5rem" class="r"><a href="#bestilling" class="btn-p" onclick="go('bestilling')">Få gratis tilbud</a></div>
+  </div>
+
+  <div class="checklist-section sec-clay">
+    <div class="sec-h" style="padding:0">
+      <p class="sec-eyebrow r">Hvorfor velge oss</p>
+      <h2 class="sec-title r d1">Det kundene våre setter pris på</h2>
+    </div>
+    <ul class="checklist">
+      <li class="r"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 413 fullførte jobber gjennom Mittanbud</li>
+      <li class="r d1"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 4.97 av 5 i snitt fra 303 BankID-verifiserte kunder</li>
+      <li class="r d2"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> A til Å-kapasitet: vi tar hele prosjektet</li>
+      <li class="r d3"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Etablert nettverk av murer, tømrer, rørlegger og elektriker</li>
+      <li class="r"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Ryddig og presist arbeid på hver eneste jobb</li>
+      <li class="r d1"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> God kommunikasjon gjennom hele prosjektet</li>
+    </ul>
+  </div>
+
+  <div class="process-grid">
+    <div class="process-step r"><div class="num">01</div><h3>Befaring</h3><p>Vi ser på rommene eller fasaden sammen med deg og kartlegger omfang og ønsker.</p></div>
+    <div class="process-step r d1"><div class="num">02</div><h3>Tilbud</h3><p>Du får et konkret og uforpliktende tilbud basert på materialvalg og arbeidsomfang.</p></div>
+    <div class="process-step r d2"><div class="num">03</div><h3>Utførelse</h3><p>Vi utfører jobben presist og effektivt, med tett dialog underveis.</p></div>
+    <div class="process-step r d3"><div class="num">04</div><h3>Ferdigstilling</h3><p>Vi rydder etter oss og går gjennom resultatet sammen med deg.</p></div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="r">Usikker på hva du trenger?</h2>
+    <p class="r d1">Send oss en uforpliktende henvendelse, så hjelper vi deg å finne riktig løsning.</p>
+    <a href="#bestilling" class="btn-p r d2" onclick="go('bestilling')">Få gratis tilbud</a>
+    <p class="cta-trust r d2">413 fullførte jobber · 4.97 av 5 stjerner · Svar innen 24 timer</p>
+  </div>
+</div>
+
+<!-- ══ GALLERI ══ -->
+<div id="page-galleri" class="page">
+  <div class="svc-hero">
+    <div class="svc-hero-text">
+      <p class="svc-hero-sub r">Galleri · ProffPaint AS</p>
+      <h1 class="svc-hero-title r d1">Tidligere<br><em>prosjekter</em></h1>
+    </div>
+    <div class="svc-hero-img ri">
+      <!-- GALLERI hero — replace with @proffpaint_as foto: utvalgt prosjekt -->
+      <img loading="lazy" src="https://images.pexels.com/photos/18369835/pexels-photo-18369835.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Maler fra ProffPaint i arbeid">
+    </div>
+  </div>
+
+  <div class="swatch-strip" aria-hidden="true"><span style="background:#b5703a"></span><span style="background:#8a9b6e"></span><span style="background:#c9a14a"></span><span style="background:#5d7a8c"></span><span style="background:#a8493a"></span><span style="background:#d9c7a8"></span><span style="background:#6b5f54"></span><span style="background:#2f2a25"></span></div>
+
+  <div class="sec-h sec-tint" style="padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem) 2rem">
+    <p class="sec-eyebrow r">413 fullførte jobber</p>
+    <h2 class="sec-title r d1">Et utvalg av arbeidet vårt</h2>
+    <p class="r d2" style="font-family:var(--fm);font-size:.95rem;color:var(--mid);margin-top:1rem;max-width:60ch;line-height:1.9">
+      Bildene under viser eksempler på innvendig og utvendig maling, sparkling, tapetsering og flislegging. Følg oss på
+      <a href="https://www.instagram.com/proffpaint_as/" target="_blank" rel="noopener" style="color:var(--gold-text)">@proffpaint_as</a>
+      for flere bilder fra pågående og ferdige prosjekter.
+    </p>
+  </div>
+
+  <div class="gal-grid" role="list" aria-label="Bildegalleri av tidligere prosjekter">
+    <!-- Galleri-bilder — erstatt alle med foto fra @proffpaint_as -->
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/271753/pexels-photo-271753.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lys og nymalt stue med hvite vegger"><span class="gal-cap">Innvendig &middot; stue</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/6180671/pexels-photo-6180671.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nymalt soverom med fargerik aksentvegg"><span class="gal-cap">Innvendig &middot; soverom</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/4953232/pexels-photo-4953232.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fasadearbeid utendørs med sikkerhetsutstyr"><span class="gal-cap">Utvendig &middot; fasade</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/14990899/pexels-photo-14990899.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sparkling og overflatebehandling av vegg"><span class="gal-cap">Sparkling</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/1672850/pexels-photo-1672850.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dekorativt fargemønster på vegg"><span class="gal-cap">Tapetsering</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/7218579/pexels-photo-7218579.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maler arbeider med rull og maling"><span class="gal-cap">Innvendig &middot; kjøkken</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/7245524/pexels-photo-7245524.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Flislagt bad med mønstrede fliser"><span class="gal-cap">Flislegging &middot; bad</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/5691610/pexels-photo-5691610.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maler ruller veggmaling i lyst rom"><span class="gal-cap">Innvendig &middot; gang</span></div>
+    <div class="gal-item ri" role="listitem"><img loading="lazy" src="https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maler arbeider med rull på vegg"><span class="gal-cap">Innvendig &middot; vegger</span></div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="r">Liker du det du ser?</h2>
+    <p class="r d1">Book en uforpliktende befaring, så ser vi på mulighetene for ditt prosjekt.</p>
+    <a href="#bestilling" class="btn-p r d2" onclick="go('bestilling')">Book befaring</a>
+    <p class="cta-trust r d2">413 fullførte jobber · 4.97 av 5 stjerner · Svar innen 24 timer</p>
+  </div>
+</div>
+
+<!-- ══ BESTILLING ══ -->
+<div id="page-bestilling" class="page">
+  <div class="svc-hero">
+    <div class="svc-hero-text">
+      <p class="svc-hero-sub r">Bestilling · ProffPaint AS</p>
+      <h1 class="svc-hero-title r d1">Book<br><em>befaring</em></h1>
+    </div>
+    <div class="svc-hero-img ri">
+      <!-- BESTILLING — replace with @proffpaint_as foto: nærbilde av kvalitetspensel -->
+      <img loading="lazy" src="https://images.pexels.com/photos/4792527/pexels-photo-4792527.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Nærbilde av malerpensel klar til bruk">
+    </div>
+  </div>
+
+  <div class="reassure sec-clay">
+    <p class="r">Velg en tid som passer deg direkte i kalenderen, eller fortell oss om prosjektet ditt. Oscar tar kontakt innen 24 timer for å avtale befaring og uforpliktende tilbud. Befaringen er gratis og uforpliktende, og du får et konkret tilbud før vi starter noe arbeid.</p>
+  </div>
+
+  <div class="booking-section">
+    <div class="sec-h" style="padding:0">
+      <p class="sec-eyebrow r">Kom i gang</p>
+      <h2 class="sec-title r d1">To måter å komme i gang på</h2>
+    </div>
+    <div class="booking-grid">
+      <div class="booking-card r">
+        <h3>Velg en tid som passer deg</h3>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/post-studionett/proffpaint" style="min-width:280px;height:680px;"></div>
+      </div>
+      <div class="booking-card r d1">
+        <h3>Foretrekker du å skrive?</h3>
+        <div id="bk-form-wrapper">
+          <form class="cf" id="bk-form" action="https://formspree.io/f/meewzwgp" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="Ny bookingforespørsel — ProffPaint AS">
+            <div class="form-row">
+              <div class="fg" id="g-bk-navn"><label for="bk-navn">Navn</label><input type="text" id="bk-navn" name="Navn" autocomplete="name" required aria-required="true" aria-describedby="err-bk-navn"><span class="ferr" id="err-bk-navn" role="alert">Oppgi navn.</span></div>
+              <div class="fg" id="g-bk-telefon"><label for="bk-telefon">Telefon</label><input type="tel" id="bk-telefon" name="Telefon" autocomplete="tel" required aria-required="true" aria-describedby="err-bk-telefon"><span class="ferr" id="err-bk-telefon" role="alert">Oppgi telefonnummer.</span></div>
+            </div>
+            <div class="fg" id="g-bk-epost"><label for="bk-epost">E-post</label><input type="email" id="bk-epost" name="E-post" autocomplete="email" required aria-required="true" aria-describedby="err-bk-epost"><span class="ferr" id="err-bk-epost" role="alert">Oppgi gyldig e-post.</span></div>
+            <div class="form-row">
+              <div class="fg" id="g-bk-type"><label for="bk-type">Type jobb</label>
+                <select id="bk-type" name="Type jobb" required aria-required="true" aria-describedby="err-bk-type">
+                  <option value="">Velg type jobb</option>
+                  <option value="Innvendig maling">Innvendig maling</option>
+                  <option value="Utvendig maling">Utvendig maling</option>
+                  <option value="Sparkling">Sparkling</option>
+                  <option value="Tapetsering">Tapetsering</option>
+                  <option value="Flislegging">Flislegging</option>
+                  <option value="Annet">Annet</option>
+                </select>
+                <span class="ferr" id="err-bk-type" role="alert">Velg type jobb.</span>
+              </div>
+              <div class="fg" id="g-bk-dato"><label for="bk-dato">Ønsket dato</label><input type="date" id="bk-dato" name="Ønsket dato" required aria-required="true" min="" aria-describedby="err-bk-dato"><span class="ferr" id="err-bk-dato" role="alert">Velg en dato.</span></div>
+            </div>
+            <div class="fg" id="g-bk-beskrivelse"><label for="bk-beskrivelse">Beskrivelse av oppdraget</label><textarea id="bk-beskrivelse" name="Beskrivelse av oppdraget" rows="4" required aria-required="true" aria-describedby="err-bk-beskrivelse"></textarea><span class="ferr" id="err-bk-beskrivelse" role="alert">Beskriv oppdraget kort.</span></div>
+            <div><button type="submit" class="btn-send" id="bk-sub" aria-live="polite">Send forespørsel</button></div>
+          </form>
+        </div>
+        <div id="bk-ok" class="fok" role="status" aria-live="polite">Takk! Oscar tar kontakt innen 24 timer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section sec-tint">
+    <div class="sec-h" style="padding:0">
+      <p class="sec-eyebrow r">Spørsmål</p>
+      <h2 class="sec-title r d1">Ofte stilte spørsmål</h2>
+    </div>
+    <div role="list">
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false" aria-controls="fa1" id="fb1">Hva koster det å male en leilighet?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div id="fa1" class="faq-ans"><div class="faq-inner">Prisen avhenger av størrelse, antall strøk og hvor mye sparkling som trengs. Vanlig innvendig maling i Oslo-området ligger ofte mellom 250–500 kr per m² inkludert materiell, men vi gir alltid et konkret tilbud etter befaring slik at du vet nøyaktig hva jobben koster.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false" aria-controls="fa2" id="fb2">Hvor lang tid tar et malerprosjekt?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div id="fa2" class="faq-ans"><div class="faq-inner">Et vanlig rom tar gjerne 1–2 dager inkludert sparkling, grunning, tørketid og to strøk maling. Større prosjekter med flere rom eller fasader avtaler vi en tidsplan for under befaringen, slik at du vet når vi starter og når vi er ferdige.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false" aria-controls="fa3" id="fb3">Må jeg flytte møblene selv?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div id="fa3" class="faq-ans"><div class="faq-inner">Vi setter pris på om mindre møbler og løse gjenstander er flyttet unna før vi starter, men vi hjelper gjerne til med tunge møbler og dekker alltid gulv og inventar grundig med tildekking før arbeidet begynner.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false" aria-controls="fa4" id="fb4">Hvilken type maling bruker dere?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div id="fa4" class="faq-ans"><div class="faq-inner">Vi anbefaler kvalitetsmaling fra anerkjente leverandører tilpasset hvert underlag og rom, for eksempel mer slitesterk maling på bad og kjøkken. Du står fritt til å velge egen farge og produkt, og vi gir gjerne råd basert på erfaring fra over 400 prosjekter.</div></div></div>
+      <div class="faq-item"><button class="faq-btn" aria-expanded="false" aria-controls="fa5" id="fb5">Tar dere oppdrag utenfor Oslo?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div id="fa5" class="faq-ans"><div class="faq-inner">Ja. Vi holder til i Ytre Enebakk og tar oppdrag i hele Oslo og Viken-området. Ta kontakt med adressen din, så bekrefter vi raskt om vi dekker området ditt.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OM OSS ══ -->
+<div id="page-om-oss" class="page">
+  <div class="about-hero">
+    <div class="about-img-col ri">
+      <!-- OM OSS — replace with @proffpaint_as foto: Oscar Buyukbas eller team i arbeid -->
+      <img loading="lazy" id="about-img" src="https://images.pexels.com/photos/5799042/pexels-photo-5799042.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Detaljarbeid med maling og verktøy">
+    </div>
+    <div class="about-text-col">
+      <p class="about-overline r">Om ProffPaint</p>
+      <h1 class="about-name r d1">Etablert av<br><em>Oscar Buyukbas</em><br>i 2017</h1>
+      <div class="about-rule r d2"></div>
+      <p class="about-body r d2">Vi har malerfaglig kompetanse og praksis innen alle deler av malerfaget. Vi utfører arbeid både på nybygg og ved rehabilitering. Vi er fleksible på alle jobber innen overflateteknikk og kan bistå fra A til Å, med rask responstid og høy kvalitet uten at det ene går på bekostning av det andre.</p>
+      <p class="about-body r d3">Vi har etablert tett samarbeid med murer, tømrer, rørlegger og elektriker, slik at du som kunde slipper å forholde deg til mange aktører. Vi har stor tro på god kommunikasjon mellom kunde og oss gjennom hele prosjektet.</p>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap" class="r d3">
+        <a href="#bestilling" class="btn-p" onclick="go('bestilling')">Book befaring</a>
+        <a href="#galleri" class="btn-o" onclick="go('galleri')">Se galleri</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline sec-clay" role="list">
+    <div class="timeline-item r" role="listitem"><div class="year">2017</div><p>ProffPaint AS etableres av Oscar Buyukbas i Ytre Enebakk.</p></div>
+    <div class="timeline-item r d1" role="listitem"><div class="year">2020</div><p>200 fullførte jobber for kunder i Oslo og Viken.</p></div>
+    <div class="timeline-item r d2" role="listitem"><div class="year">2023</div><p>Oppnår Top Rated-status på Mittanbud.</p></div>
+    <div class="timeline-item r d3" role="listitem"><div class="year">2025</div><p>413+ fullførte jobber, 303 evalueringer og 4.97 i snitt.</p></div>
+  </div>
+
+  <div class="value-row" role="list">
+    <div class="value-cell r" role="listitem"><h3>Fagkunnskap i alle ledd</h3><p>Vi har praksis innen alle deler av malerfaget, fra underlagsbehandling til siste strøk. Det gir deg et resultat som holder i mange år fremover.</p></div>
+    <div class="value-cell r d1" role="listitem"><h3>God kommunikasjon alltid</h3><p>Vi tror på tett dialog gjennom hele prosjektet, slik at du alltid vet hva som skjer og når. Ingen overraskelser, kun tydelige avtaler.</p></div>
+    <div class="value-cell r d2" role="listitem"><h3>Ryddig og presist, uten unntak</h3><p>Vi dekker til, rydder etter oss og leverer i henhold til avtale på hver eneste jobb. Det er en av grunnene til at kundene våre kommer tilbake.</p></div>
+  </div>
+
+  <div class="testimonials sec-tint">
+    <div class="testi r"><span class="testi-n">02 / Kunde</span><div><blockquote>Kom som avtalt og var ryddig og lett å kommunisere med.</blockquote><p class="testi-who">— Kunde, Oslo · Innvendig maling, tak og vegger</p></div></div>
+    <div class="testi r d1"><span class="testi-n">03 / Kunde</span><div><blockquote>Profesjonelt utført arbeid.</blockquote><p class="testi-who">— Kunde, Asker · Tak og vegger, soverom og stue</p></div></div>
+    <div class="testi r d2"><span class="testi-n">04 / Kunde</span><div><blockquote>Dyktig, effektiv, god kommunikasjon og leverte i henhold til avtale. Veldig fornøyd og benytter han gjerne igjen.</blockquote><p class="testi-who">— Kunde, Nesodden</p></div></div>
+  </div>
+
+  <div class="cta-band">
+    <h2 class="r">La oss ta en prat om prosjektet ditt</h2>
+    <p class="r d1">Book en uforpliktende befaring, så ser vi på mulighetene sammen.</p>
+    <a href="#bestilling" class="btn-p r d2" onclick="go('bestilling')">Book befaring</a>
+    <p class="cta-trust r d2">413 fullførte jobber · 4.97 av 5 stjerner · Svar innen 24 timer</p>
+  </div>
+</div>
+
+<!-- ══ KONTAKT ══ -->
+<div id="page-kontakt" class="page">
+  <div class="contact-top">
+    <div class="contact-top-text">
+      <p class="about-overline r" style="font-family:var(--fm);font-size:.68rem">Kom i kontakt</p>
+      <h1 class="contact-h1 r d1">La oss<br>snakke om<br><em>prosjektet</em></h1>
+      <p class="contact-sub r d2">Oscar tar alle henvendelser direkte.<br>Svar innen 24 timer.</p>
+    </div>
+    <div class="contact-top-img ri">
+      <!-- KONTAKT — replace with @proffpaint_as foto: hus under utvendig maling med stillas -->
+      <img loading="lazy" src="https://images.pexels.com/photos/4953232/pexels-photo-4953232.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Fasadearbeid utendørs med sikkerhetsutstyr">
+    </div>
+  </div>
+
+  <div class="contact-body">
+    <div class="contact-aside">
+      <h2 class="contact-aside-h r">Direkte kontakt</h2>
+      <div class="c-detail r"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div><span class="c-label">Telefon</span><a href="tel:+4745059555" class="c-val">+47 450 59 555</a></div></div>
+      <div class="c-detail r d1"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><span class="c-label">Adresse</span><span class="c-val">Ekornveien 14<br>1914 Ytre Enebakk</span></div></div>
+      <div class="c-detail r d2" style="display:block">
+        <span class="c-label">Åpningstider</span>
+        <table class="hours-table">
+          <tbody>
+            <tr><td>Mandag–fredag</td><td>08:00–17:00</td></tr>
+            <tr><td>Lørdag</td><td>08:00–14:00</td></tr>
+            <tr><td>Søndag</td><td>Stengt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="instagram-card r d3">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--gold)"/></svg>
+        <div><span>@proffpaint_as</span><a href="https://www.instagram.com/proffpaint_as/" target="_blank" rel="noopener">Følg oss på Instagram</a></div>
+      </div>
+      <iframe class="map-frame r" loading="lazy" title="Kart over ProffPaint AS, Ekornveien 14, 1914 Ytre Enebakk" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2003.4!2d11.039054!3d59.7304236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46415fc5d195283b%3A0x74a5b1fb421cc90f!2sEkornveien+14%2C+1914+Ytre+Enebakk!5e0!3m2!1sno!2sno!4v1"></iframe>
+    </div>
+    <div class="contact-form-col">
+      <h2 class="form-h r">Send en melding</h2>
+      <div id="ct-form-wrapper">
+        <form class="cf" id="ct-form" action="https://formspree.io/f/meewzwgp" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Ny kontakthenvendelse — ProffPaint AS">
+          <div class="form-row">
+            <div class="fg r" id="g-ct-navn"><label for="ct-navn">Navn</label><input type="text" id="ct-navn" name="Navn" autocomplete="name" required aria-required="true" aria-describedby="err-ct-navn"><span class="ferr" id="err-ct-navn" role="alert">Oppgi navn.</span></div>
+            <div class="fg r d1" id="g-ct-telefon"><label for="ct-telefon">Telefon</label><input type="tel" id="ct-telefon" name="Telefon" autocomplete="tel" required aria-required="true" aria-describedby="err-ct-telefon"><span class="ferr" id="err-ct-telefon" role="alert">Oppgi telefonnummer.</span></div>
+          </div>
+          <div class="fg r d1" id="g-ct-epost"><label for="ct-epost">E-post</label><input type="email" id="ct-epost" name="E-post" autocomplete="email" required aria-required="true" aria-describedby="err-ct-epost"><span class="ferr" id="err-ct-epost" role="alert">Oppgi gyldig e-post.</span></div>
+          <div class="fg r d2" id="g-ct-melding"><label for="ct-melding">Melding</label><textarea id="ct-melding" name="Melding" rows="4" required aria-required="true" aria-describedby="err-ct-melding"></textarea><span class="ferr" id="err-ct-melding" role="alert">Skriv en melding.</span></div>
+          <div class="r d3"><button type="submit" class="btn-send" id="ct-sub" aria-live="polite">Send melding</button></div>
+        </form>
+      </div>
+      <div id="ct-ok" class="fok" role="status" aria-live="polite">Takk! Oscar tar kontakt innen 24 timer.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="ft">
+    <div><a href="#hjem" class="fl" onclick="go('hjem')"><img src="proffpaint-as-Photoroom.png" alt="ProffPaint AS"></a><p class="ftag">Maler · Oslo · Viken · Ytre Enebakk</p></div>
+    <div><div class="fnt">Navigasjon</div><ul class="fnl" role="list"><li><a href="#hjem" onclick="go('hjem')">Hjem</a></li><li><a href="#tjenester" onclick="go('tjenester')">Tjenester</a></li><li><a href="#galleri" onclick="go('galleri')">Galleri</a></li><li><a href="#bestilling" onclick="go('bestilling')">Bestilling</a></li><li><a href="#om-oss" onclick="go('om-oss')">Om oss</a></li><li><a href="#kontakt" onclick="go('kontakt')">Kontakt</a></li></ul></div>
+    <div><div class="fnt">Kontakt</div><div class="fci">
+      <div class="fci-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+4745059555">+47 450 59 555</a></div>
+      <div class="fci-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Ekornveien 14, 1914 Ytre Enebakk</span></div>
+      <div class="fci-item"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--gold)"/></svg><a href="https://www.instagram.com/proffpaint_as/" target="_blank" rel="noopener">@proffpaint_as</a></div>
+    </div></div>
+  </div>
+  <div class="fb"><p class="fc">© <span id="cur-year">2025</span> ProffPaint AS. Alle rettigheter forbeholdt.</p><p class="fc">Org.nr. 918 353 607 MVA</p></div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const pages={hjem:document.getElementById('page-hjem'),tjenester:document.getElementById('page-tjenester'),galleri:document.getElementById('page-galleri'),bestilling:document.getElementById('page-bestilling'),'om-oss':document.getElementById('page-om-oss'),kontakt:document.getElementById('page-kontakt')};
+  const navLinks=document.querySelectorAll('#nav .nav-center a');
+  function setActiveNav(id){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id))}
+  function showPage(id){Object.values(pages).forEach(p=>p.classList.remove('active'));pages[id].classList.add('active');setActiveNav(id);setTimeout(reveal,120)}
+  window.go=function(id){if(!pages[id])return;showPage(id);location.hash=id;window.scrollTo({top:0,behavior:'smooth'})};
+  const h=location.hash.replace('#','');const s=pages[h]?h:'hjem';showPage(s);
+  window.addEventListener('hashchange',()=>{const id=location.hash.replace('#','');showPage(pages[id]?id:'hjem');window.scrollTo({top:0,behavior:'smooth'})});
+
+  document.getElementById('cur-year').textContent=new Date().getFullYear();
+  const bkDato=document.getElementById('bk-dato');if(bkDato)bkDato.min=new Date().toISOString().split('T')[0];
+
+  const navbar=document.getElementById('nav');window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+  setTimeout(()=>{document.querySelectorAll('#hero-left .r').forEach(el=>el.classList.add('v'))},200);
+
+  const hImg=document.getElementById('hero-img');if(hImg){hImg.addEventListener('load',()=>hImg.classList.add('loaded'));if(hImg.complete)hImg.classList.add('loaded')}
+  const aImg=document.getElementById('about-img');if(aImg){aImg.addEventListener('load',()=>aImg.classList.add('loaded'));if(aImg.complete)aImg.classList.add('loaded')}
+
+  const hbg=document.getElementById('hbg'),mob=document.getElementById('mob-nav'),mainEl=document.getElementById('main-content'),footerEl=document.querySelector('footer');
+  function setMobOpen(o){
+    mob.classList.toggle('open',o);hbg.classList.toggle('open',o);
+    hbg.setAttribute('aria-expanded',String(o));hbg.setAttribute('aria-label',o?'Lukk meny':'Åpne meny');
+    document.body.style.overflow=o?'hidden':'';
+    mob.toggleAttribute('inert',!o);
+    if(mainEl)mainEl.toggleAttribute('inert',o);
+    if(footerEl)footerEl.toggleAttribute('inert',o);
+    if(o)mob.querySelector('a')?.focus();else hbg.focus()
+  }
+  hbg.addEventListener('click',function(){setMobOpen(!mob.classList.contains('open'))});
+  window.closeMob=function(){setMobOpen(false)};
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&mob.classList.contains('open'))setMobOpen(false)});
+
+  const pr=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function reveal(){if(pr){document.querySelectorAll('.r,.ri').forEach(e=>e.classList.add('v'));return}const els=document.querySelectorAll('.page.active .r:not(.v),.page.active .ri:not(.v)');if(!els.length)return;const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:0.07,rootMargin:'0px 0px -24px 0px'});els.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-20)el.classList.add('v');else obs.observe(el)})}
+  window.addEventListener('scroll',reveal,{passive:true});setTimeout(reveal,280);
+
+  document.querySelectorAll('.faq-btn').forEach(b=>{b.addEventListener('click',function(){const ex=this.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-btn').forEach(x=>{x.setAttribute('aria-expanded','false');const p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.classList.remove('open')});if(!ex){this.setAttribute('aria-expanded','true');const p=document.getElementById(this.getAttribute('aria-controls'));if(p)p.classList.add('open')}})});
+
+  function setupForm(formId,wrapId,okId,subId,fields){
+    const form=document.getElementById(formId),wrap=document.getElementById(wrapId),ok=document.getElementById(okId),sub=document.getElementById(subId);
+    if(!form)return;
+    function chk(id,el,t){const g=document.getElementById('g-'+id);const v=el.value;let valid=true;if(t==='req'&&!v.trim())valid=false;if(t==='em'&&(!v.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)))valid=false;if(g)g.classList.toggle('err',!valid);return valid}
+    fields.forEach(([id,t])=>{const el=document.getElementById(id);if(el)el.addEventListener('blur',function(){chk(id,this,t)})});
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      let allOk=true;
+      fields.forEach(([id,t])=>{const el=document.getElementById(id);if(!chk(id,el,t))allOk=false});
+      if(!allOk)return;
+      sub.textContent='Sender…';sub.disabled=true;
+      try{
+        const r=await fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
+        if(r.ok){wrap.style.display='none';ok.style.display='block'}
+        else{sub.textContent='Noe gikk galt. Ring oss på +47 450 59 555.';sub.disabled=false}
+      }catch{sub.textContent='Noe gikk galt. Ring oss på +47 450 59 555.';sub.disabled=false}
+    });
+  }
+  setupForm('bk-form','bk-form-wrapper','bk-ok','bk-sub',[['bk-navn','req'],['bk-telefon','req'],['bk-epost','em'],['bk-type','req'],['bk-dato','req'],['bk-beskrivelse','req']]);
+  setupForm('ct-form','ct-form-wrapper','ct-ok','ct-sub',[['ct-navn','req'],['ct-telefon','req'],['ct-epost','em'],['ct-melding','req']]);
+});
+</script>
+</body>
+</html>
